@@ -17,12 +17,19 @@ class DefaultController
     public function actionIndex()
     {
 
-        $user = Users::loggedUser();
+        $users = new Users();
+        $user = $users->loggedUser();
 
-        echo "<pre>";
-        print_r($user);
-        die();
+        $username = $users->getOneUser($user);
 
-        return $this->view->render('index', []);
+
+
+
+        $title = 'Главная страница администрирования';
+        return $this->view->render('index', [
+            'title' => $title,
+            'username' => $username['name'],
+            'access' => $username['access'],
+        ]);
     }
 }
