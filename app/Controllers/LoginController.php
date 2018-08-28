@@ -26,6 +26,11 @@ class LoginController extends DefaultController
 
     }
 
+    public function actionLogout(){
+        $_SESSION['user'] = '';
+        header('Location: /');
+    }
+
     public function actionUser(){
         return $this->view->render('user',[]);
     }
