@@ -19,7 +19,6 @@ class DefaultController
 
         $users = new Users();
         $user = $users->loggedUser();
-
         $username = $users->getOneUser($user);
 
 

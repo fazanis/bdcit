@@ -8,6 +8,7 @@ require APPLICATION_PATH .'/../vendor/autoload.php';
 
 
 $routers = explode('/', $_SERVER['REQUEST_URI']);
+
 $fileName = 'default';
 $actionName = 'actionIndex';
 if (!empty($routers[1])) {
@@ -18,7 +19,12 @@ if (!empty($routers[2])) {
     $actionName = 'action' . ucfirst($routers[2]);
 
 }
-
+if (!empty($routers[3])) {
+    $param = $routers[3];
+}
+echo "<pre>";
+print_r($param);
+die();
 $nameController = APPLICATION_PATH . 'Controllers/' . ucfirst($fileName) . 'Controller.php';
 
 try {

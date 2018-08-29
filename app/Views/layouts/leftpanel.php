@@ -4,7 +4,7 @@
             <img class="img-circle" src="/public/images/photos/profile.png" alt="">
         </a>
         <div class="media-body">
-            <h4 class="media-heading"><?=$username?></h4>
+            <h4 class="media-heading"><?=\App\Models\Users::getOneUser(1)['name']?></h4>
 <!--            <small class="text-muted">--><?//=$access?><!--</small>-->
         </div>
     </div><!-- media -->
@@ -12,7 +12,10 @@
     <h5 class="leftpanel-title">Навигация</h5>
     <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="/"><i class="fa fa-home"></i> <span>Главная</span></a></li>
-        <li><a href="messages.html"><span class="pull-right badge">5</span><i class="fa fa-envelope-o"></i> <span>Messages</span></a></li>
+        <?if(\App\Models\Users::getOneUser(1)['access']==1):?>
+        <li><a href="/user/"><span class="pull-right badge">5</span><i class="fa fa-users"></i> <span>Пользователи</span></a></li>
+        <?endif;?>
+        <li><a href="messages.html"><span class="pull-right badge">5</span><i class="fa fa-envelope-o"></i> <span>Пользователи</span></a></li>
         <li class="parent"><a href=""><i class="fa fa-suitcase"></i> <span>UI Elements</span></a>
             <ul class="children">
                 <li><a href="alerts.html">Alerts &amp; Notifications</a></li>
