@@ -22,9 +22,7 @@ if (!empty($routers[2])) {
 if (!empty($routers[3])) {
     $param = $routers[3];
 }
-echo "<pre>";
-print_r($param);
-die();
+
 $nameController = APPLICATION_PATH . 'Controllers/' . ucfirst($fileName) . 'Controller.php';
 
 try {
