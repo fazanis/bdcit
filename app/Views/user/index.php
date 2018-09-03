@@ -44,7 +44,10 @@
                     <td> <?=$user['name']?></td>
                     <td><?=$user['login']?></td>
                     <td><?=\App\Models\Siti::getSitiById($user['access'])?></td>
-                    <td><a href="edit/<?=$user['id']?>/">изменить</a></td>
+                    <td>
+                        <a href="edit/<?=$user['id']?>/"><i class="fa fa-edit"></i></a>
+                        <a href="drop/<?=$user['id']?>/"><i class="fa fa-minus-circle"></i></a>
+                    </td>
 
                 </tr>
                 <?endforeach;?>

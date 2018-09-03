@@ -21,8 +21,6 @@ class DefaultController
         $user = $users->loggedUser();
         $username = $users->getOneUser($user);
 
-
-
         $title = 'Главная страница администрирования';
         return $this->view->render('index', [
             'title' => $title,
@@ -30,4 +28,5 @@ class DefaultController
             'access' => $username['access'],
         ]);
     }
+    
 }

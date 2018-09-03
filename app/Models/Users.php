@@ -77,6 +77,7 @@ class Users
    //Добавление пользователей
    public function createUser(array $data){
        $db = DB::Connection();
+
        $insert = "INSERT INTO user (name,email,login,password,access) VALUES (:name2,:email,:login,:password,:access)";
        $result = $db->prepare($insert);
        $result->bindParam(':name2',$data['name'],\PDO::PARAM_STR);
@@ -90,18 +91,39 @@ class Users
    // Изменение пользователей
    public function updateUser($id,array $data){
        $db = DB::Connection();
-       $update = "UPDATE user SET name=:name,email=:email,login=:login,password=:password,access=:access WHERE id = :id";
-       $result = $db->prepare($update);
-       $result->bindParam(':id',$id,\PDO::PARAM_INT);
-       $result->bindParam(':name',$data['name'],\PDO::PARAM_STR);
-       $result->bindParam(':email',$data['email'],\PDO::PARAM_STR);
-       $result->bindParam(':login',$data['login'],\PDO::PARAM_STR);
-       $result->bindParam(':password',password_hash($data['password'],PASSWORD_DEFAULT),\PDO::PARAM_STR);
-       $result->bindParam(':access',$data['access'],\PDO::PARAM_INT);
+
+       if($data['password']==''){
+           $update = "UPDATE user SET name=:name,email=:email,login=:login,access=:access WHERE id = :id";
+           $result = $db->prepare($update);
+           $result->bindParam(':id',$id,\PDO::PARAM_INT);
+           $result->bindParam(':name',$data['name'],\PDO::PARAM_STR);
+           $result->bindParam(':email',$data['email'],\PDO::PARAM_STR);
+           $result->bindParam(':login',$data['login'],\PDO::PARAM_STR);
+           $result->bindParam(':access',$data['access'],\PDO::PARAM_INT);
+       }else {
+           $update = "UPDATE user SET name=:name,email=:email,login=:login,password=:password,access=:access WHERE id = :id";
+           $result = $db->prepare($update);
+           $result->bindParam(':id', $id, \PDO::PARAM_INT);
+           $result->bindParam(':name', $data['name'], \PDO::PARAM_STR);
+           $result->bindParam(':email', $data['email'], \PDO::PARAM_STR);
+           $result->bindParam(':login', $data['login'], \PDO::PARAM_STR);
+           $result->bindParam(':password', password_hash($data['password'], PASSWORD_DEFAULT), \PDO::PARAM_STR);
+           $result->bindParam(':access', $data['access'], \PDO::PARAM_INT);
+       }
        $result->execute();
 
        header('Location: /user/');
 
+   }
+
+   public function dropUser($id){
+        $db = DB::Connection();
+
+        $drop = "DELETE FROM user WHERE id = :id";
+        $rezult = $db->prepare($drop);
+        $rezult->bindParam(':id',$id,\PDO::PARAM_INT);
+        $rezult->execute();
+        header('Location: /user/');
    }
 
    //Получение общего числа пользователей

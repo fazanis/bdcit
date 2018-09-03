@@ -57,6 +57,12 @@ class UserController extends DefaultController
             ]);
     }
 
+    public function actionDrop($id){
+        self::rangUser();
+        $user= new Users();
+        $user->dropUser($id);
+    }
+
     public function rangUser(){
         if (Users::getUserAccess()['access']!=1){
             echo 'Ваши права ограничены!';

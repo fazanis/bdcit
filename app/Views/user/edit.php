@@ -62,9 +62,9 @@
                                     </div>
                                 </div><!-- form-group -->
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Пароль <span class="asterisk">*</span></label>
+                                    <label class="col-sm-3 control-label">Пароль </label>
                                     <div class="col-sm-9">
-                                        <input type="password" name="password" class="form-control" value="<?=$user['password']?>" required />
+                                        <input type="password" name="password" class="form-control" />
                                     </div>
                                 </div><!-- form-group -->
                                 <div class="form-group">
