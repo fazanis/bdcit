@@ -10,7 +10,6 @@ class LoginController extends DefaultController
         if(isset($_POST['butpost'])){
             $login = $_POST['login'];
             $password = $_POST['password'];
-
             $user = new Users();
             $userId= $user->userSingin($login,$password);
 

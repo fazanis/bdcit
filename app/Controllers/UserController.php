@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: User
- * Date: 29.08.2018
- * Time: 10:14
- */
 
 namespace App;
 
@@ -15,6 +9,9 @@ use App\Models\Users;
 class UserController extends DefaultController
 {
     public function actionIndex(){
+
+        self::rangUser();
+
         $title = 'Управление пользователями';
         $users = new Users();
         $userlist = $users->getAllUser();
@@ -28,6 +25,7 @@ class UserController extends DefaultController
     }
 
     public function actionCreate(){
+        self::rangUser();
         $title = 'Добавление пользователя';
         $sities = new Siti();
         $siti = $sities->getCiti();
@@ -42,8 +40,27 @@ class UserController extends DefaultController
         ]);
     }
 
-    public function actionEdit(){
-        return $this->view->render('edit',[]);
+    public function actionEdit($id){
+        self::rangUser();
+        $userList=new Users();
+        $user = $userList->getOneUser($id);
+        $sities = new Siti();
+        $siti = $sities->getCiti();
+
+        if($_POST['saveuser']){
+            $user = new Users();
+            $user->updateUser($id,$_POST);
+        }
+        return $this->view->render('edit',[
+            'user'=>$user,
+            'siti'=>$siti,
+            ]);
     }
 
+    public function rangUser(){
+        if (Users::getUserAccess()['access']!=1){
+            echo 'Ваши права ограничены!';
+            exit();
+        }
+    }
 }

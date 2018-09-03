@@ -4,6 +4,8 @@ use App\Core\DB;
 
 class Users
 {
+    // Авторизация пользователя
+
    public function loggedUser(){
        if($_SESSION['user']){
            return $_SESSION['user'];
@@ -11,26 +13,40 @@ class Users
        header('Location: /login');
    }
 
+   //Проверка логина и пароля после авторизации
    public function userSingin($login,$password){
        $db = DB::Connection();
 
-       $select = 'SELECT * FROM user WHERE login = :login and password = :password';
+       $select = 'SELECT * FROM user WHERE login = :login';
        $result = $db->prepare($select);
        $result->bindParam(':login',$login, \PDO::PARAM_STR);
-       $result->bindParam(':password',$password, \PDO::PARAM_STR);
        $result->execute();
-
        $user = $result->fetch(\PDO::FETCH_ASSOC);
-       if($user){
+       if(password_verify($password,$user['password'])){
            $_SESSION['user'] = $user['id'];
            return $user['id'];
        }
+
    }
 
-   public static function getOneUser($id){
+   // Получение прав пользователя
+   public static function getUserAccess(){
        $db = DB::Connection();
+       $id = $_SESSION['user'];
+       $select = 'SELECT * FROM user WHERE id = :id';
+       $result = $db->prepare($select);
+       $result->bindParam(':id',$id, \PDO::PARAM_STR);
+       $result->execute();
+       $user = $result->fetch(\PDO::FETCH_ASSOC);
+       return $user;
 
-       $select = 'Select * FROM user WHERE id=:id';
+
+   }
+
+   //Получение данных одного пользователя по id
+   public function getOneUser($id){
+       $db = DB::Connection();
+       $select = 'SELECT * FROM user WHERE id=:id';
        $result = $db->prepare($select);
        $result->bindParam(':id',$id,\PDO::PARAM_STR);
        $result->execute();
@@ -40,6 +56,7 @@ class Users
        return $user;
    }
 
+   //Получение списка пользователей
    public function getAllUser(){
        $db = DB::Connection();
 
@@ -57,6 +74,7 @@ class Users
        return $user;
    }
 
+   //Добавление пользователей
    public function createUser(array $data){
        $db = DB::Connection();
        $insert = "INSERT INTO user (name,email,login,password,access) VALUES (:name2,:email,:login,:password,:access)";
@@ -64,8 +82,35 @@ class Users
        $result->bindParam(':name2',$data['name'],\PDO::PARAM_STR);
        $result->bindParam(':email',$data['email'],\PDO::PARAM_STR);
        $result->bindParam(':login',$data['login'],\PDO::PARAM_STR);
-       $result->bindParam(':password',$data['password'],\PDO::PARAM_STR);
+       $result->bindParam(':password',password_hash($data['password'],PASSWORD_DEFAULT),\PDO::PARAM_STR);
        $result->bindParam(':access',$data['access'],\PDO::PARAM_INT);
        $result->execute();
+   }
+
+   // Изменение пользователей
+   public function updateUser($id,array $data){
+       $db = DB::Connection();
+       $update = "UPDATE user SET name=:name,email=:email,login=:login,password=:password,access=:access WHERE id = :id";
+       $result = $db->prepare($update);
+       $result->bindParam(':id',$id,\PDO::PARAM_INT);
+       $result->bindParam(':name',$data['name'],\PDO::PARAM_STR);
+       $result->bindParam(':email',$data['email'],\PDO::PARAM_STR);
+       $result->bindParam(':login',$data['login'],\PDO::PARAM_STR);
+       $result->bindParam(':password',password_hash($data['password'],PASSWORD_DEFAULT),\PDO::PARAM_STR);
+       $result->bindParam(':access',$data['access'],\PDO::PARAM_INT);
+       $result->execute();
+
+       header('Location: /user/');
+
+   }
+
+   //Получение общего числа пользователей
+   public static function getCollParam(){
+       $db = DB::Connection();
+       $select = "SELECT COUNT(*) FROM user";
+       $result = $db->prepare($select);
+       $result->execute();
+       $coll = $result->fetch();
+       return $coll[0];
    }
 }

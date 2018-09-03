@@ -23,7 +23,6 @@ class DefaultController
 
 
 
-
         $title = 'Главная страница администрирования';
         return $this->view->render('index', [
             'title' => $title,
