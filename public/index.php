@@ -20,8 +20,12 @@ if (!empty($routers[2])) {
 
 }
 if (!empty($routers[3])) {
-    $param = $routers[3];
+    $parameters = $routers[3];
 }
+
+$parram = array_slice($routers,3  );
+
+
 
 $nameController = APPLICATION_PATH . 'Controllers/' . ucfirst($fileName) . 'Controller.php';
 
@@ -40,10 +44,14 @@ try {
     }
 
     if (method_exists($class, $actionName)) {
-        $class->$actionName();
+        $class->$actionName($parram[0],$parram[1],$parram[2]);
+
     } else {
         throw new Exception('Метот не найден');
     }
+
+
+
 } catch (Exception $e) {
     //Выводим сообщение об исключении.
     require APPLICATION_PATH . '/errors/404.php';
