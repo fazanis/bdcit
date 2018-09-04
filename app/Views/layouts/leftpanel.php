@@ -1,10 +1,12 @@
+<?
+use \App\Models\Users;?>
 <div class="leftpanel">
     <div class="media profile-left">
-        <a class="pull-left profile-thumb" href="profile.html">
+        <a class="pull-left profile-thumb" href="/myprofile/">
             <img class="img-circle" src="/public/images/photos/profile.png" alt="">
         </a>
         <div class="media-body">
-            <h4 class="media-heading"><?=\App\Models\Users::getUserAccess()['name']?></h4>
+            <h4 class="media-heading"><a href="/myprofile/"><?=Users::getUserAccess()['name']?></a></h4>
 <!--            <small class="text-muted">--><?//=$access?><!--</small>-->
         </div>
     </div><!-- media -->
@@ -13,13 +15,13 @@
     <ul class="nav nav-pills nav-stacked">
         <li <?if ($_GET['route']==''):?>class="active"<?endif;?>><a href="/"><i class="fa fa-home"></i> <span>Главная</span></a></li>
 
-        <?if(\App\Models\Users::getUserAccess()['access']==1):?>
-        <li <?if ($_GET['route']=='user/'):?>class="active"<?endif;?>><a href="/user/"><span class="pull-right badge"><?=\App\Models\Users::getCollParam()?></span><i class="fa fa-users"></i> <span>Пользователи</span></a></li>
+        <?if(Users::getUserAccess()['access']==1):?>
+        <li <?if ($_GET['route']=='user/'):?>class="active"<?endif;?>><a href="/user/"><span class="pull-right badge"><?=Users::getCollParam()?></span><i class="fa fa-users"></i> <span>Пользователи</span></a></li>
         <li <?if ($_GET['route']=='raion/'):?>class="active"<?endif;?>><a href="/raion/"><span class="pull-right badge"><?=\App\Models\Raion::getCollRaion()?></span><i class="fa fa-envelope-o"></i> <span>Списки районов</span></a></li>
         <?endif;?>
         <li class="parent"><a href=""><i class="fa fa-suitcase"></i> <span>Базы данных</span></a>
             <ul class="children">
-                <li><a href="/bd/svod/">База данных свод</a></li>
+                <li><a href="/database/svod/">База данных свод</a></li>
                 <li><a href="buttons.html">Buttons</a></li>
                 <li><a href="extras.html">Extras</a></li>
                 <li><a href="graphs.html">Graphs &amp; Charts</a></li>
@@ -31,7 +33,7 @@
                 <li><a href="typography.html">Typography</a></li>
             </ul>
         </li>
-        <li class="parent"><a href=""><i class="fa fa-edit"></i> <span>Forms</span></a>
+        <li class="parent"><a href=""><i class="fa fa-edit"></i> <span>Отчеты</span></a>
             <ul class="children">
                 <li><a href="code-editor.html">Code Editor</a></li>
                 <li><a href="general-forms.html">General Forms</a></li>
