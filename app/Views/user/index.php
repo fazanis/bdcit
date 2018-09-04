@@ -30,6 +30,7 @@
             <table id="basicTable" class="table table-striped table-bordered responsive">
                 <thead class="">
                 <tr>
+                    <th>№</th>
                     <th>ФИО(Организация)</th>
                     <th>Логин</th>
                     <th>Район</th>
@@ -38,15 +39,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?foreach ($userlist as $user):?>
+                <?$i=1;
+                foreach ($userlist as $user):?>
 
                 <tr>
+                    <td> <?=$i++?></td>
                     <td> <?=$user['name']?></td>
                     <td><?=$user['login']?></td>
-                    <td><?=\App\Models\Siti::getSitiById($user['access'])?></td>
+                    <td><?=\App\Models\Raion::getNameSitiById($user['access'])?></td>
                     <td>
                         <a href="edit/<?=$user['id']?>/"><i class="fa fa-edit"></i></a>
-                        <a href="drop/<?=$user['id']?>/"><i class="fa fa-minus-circle"></i></a>
+                        <a href="drop/<?=$user['id']?>/" onclick="return confirm('Вы действительно хотите удалить пользователя?')"><i class="fa fa-minus-circle"></i></a>
                     </td>
 
                 </tr>

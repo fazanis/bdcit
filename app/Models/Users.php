@@ -60,7 +60,7 @@ class Users
    public function getAllUser(){
        $db = DB::Connection();
 
-       $select = 'Select * FROM user';
+       $select = 'Select * FROM user WHERE access!=1';
        $result = $db->prepare($select);
        $result->bindParam(':id',$id,\PDO::PARAM_STR);
        $result->execute();
@@ -129,7 +129,7 @@ class Users
    //Получение общего числа пользователей
    public static function getCollParam(){
        $db = DB::Connection();
-       $select = "SELECT COUNT(*) FROM user";
+       $select = "SELECT COUNT(*) FROM user WHERE access!=1";
        $result = $db->prepare($select);
        $result->execute();
        $coll = $result->fetch();

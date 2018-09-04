@@ -3,6 +3,7 @@
 namespace App;
 
 
+use App\Models\Raion;
 use App\Models\Siti;
 use App\Models\Users;
 
@@ -15,8 +16,8 @@ class UserController extends DefaultController
         $title = 'Управление пользователями';
         $users = new Users();
         $userlist = $users->getAllUser();
-        $sities = new Siti();
-        $siti = $sities->getCiti();
+        $sities = new Raion();
+        $siti = $sities->getAllRaion();
         return $this->view->render('index',[
             'title'=>$title,
             'userlist' => $userlist,
@@ -27,8 +28,8 @@ class UserController extends DefaultController
     public function actionCreate(){
         self::rangUser();
         $title = 'Добавление пользователя';
-        $sities = new Siti();
-        $siti = $sities->getCiti();
+        $sities = new Raion();
+        $siti = $sities->getAllRaion();
         if($_POST['saveuser']){
             $user = new Users();
             $user->createUser($_POST);
@@ -44,8 +45,8 @@ class UserController extends DefaultController
         self::rangUser();
         $userList=new Users();
         $user = $userList->getOneUser($id);
-        $sities = new Siti();
-        $siti = $sities->getCiti();
+        $sities = new Raion();
+        $siti = $sities->getAllRaion();
 
         if($_POST['saveuser']){
             $user = new Users();
