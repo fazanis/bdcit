@@ -19,7 +19,7 @@
         <?endif;?>
         <li class="parent"><a href=""><i class="fa fa-suitcase"></i> <span>Базы данных</span></a>
             <ul class="children">
-                <li><a href="alerts.html">Alerts &amp; Notifications</a></li>
+                <li><a href="/bd/svod/">База данных свод</a></li>
                 <li><a href="buttons.html">Buttons</a></li>
                 <li><a href="extras.html">Extras</a></li>
                 <li><a href="graphs.html">Graphs &amp; Charts</a></li>
