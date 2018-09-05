@@ -5,12 +5,13 @@ namespace App;
 
 
 use App\Models\Raion;
-
+use App\Models\Users;
 class RaionController extends DefaultController
 {
 
     public function actionIndex(){
 
+        self::rangUser();
         $title = "Работа с районами области";
         $raion = new Raion();
         $raionList = $raion->getAllRaion();
@@ -23,6 +24,7 @@ class RaionController extends DefaultController
 
     public function actionCreate(){
 
+        self::rangUser();
         $title = "Добавление районов";
         if ($_POST['saveraion']){
             $raion = new Raion();
@@ -36,6 +38,7 @@ class RaionController extends DefaultController
 
     public function actionEdit($id){
 
+        self::rangUser();
         $title = "Редактирование районов";
         $raion = new Raion();
         $gorod = $raion->getOneRaionById($id);
@@ -49,7 +52,14 @@ class RaionController extends DefaultController
     }
 
     public function actionDrop($id){
+        self::rangUser();
         $raion = new Raion();
         $raion->dropRaionById($id);
+    }
+    public function rangUser(){
+        if (Users::getRoleUser()['role']!='admin'){
+            header('Location: /');
+            exit();
+        }
     }
 }

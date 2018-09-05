@@ -6,6 +6,7 @@ use App\Models\Users;
 class LoginController extends DefaultController
 {
     public function actionIndex(){
+        $title = 'Компьютерный парк организаций образования Павлодарской области';
         $errors = false;
         if(isset($_POST['butpost'])){
             $login = $_POST['login'];
@@ -21,6 +22,7 @@ class LoginController extends DefaultController
         }
             return $this->view->render('index', [
                 'errors'=> $errors,
+                'title'=>$title,
             ]);
 
     }

@@ -42,45 +42,56 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Имя <span class="asterisk">*</span></label>
+                                    <label class="col-sm-3 control-label">ФИО <span class="asterisk">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="name" class="form-control" placeholder="Введите имя..." required />
+                                        <input type="text" name="fio" class="form-control"  required />
+                                    </div>
+                                </div><!-- form-group -->
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Название организации <span class="asterisk">*</span></label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="name" class="form-control"  required />
                                     </div>
                                 </div><!-- form-group -->
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Email <span class="asterisk">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="email" name="email" class="form-control" placeholder="Введите емаил..." required />
+                                        <input type="email" name="email" class="form-control"  required />
+                                    </div>
+                                </div><!-- form-group -->
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Телефон (WhatsApp/Telegram) <span class="asterisk">*</span></label>
+                                    <div class="col-sm-9">
+                                        <input type="tel" name="phone" class="form-control" required />
                                     </div>
                                 </div><!-- form-group -->
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Логин <span class="asterisk">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="login" class="form-control" placeholder="Введите логин..." required />
+                                        <input type="text" name="login" class="form-control"  required />
                                     </div>
                                 </div><!-- form-group -->
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Пароль <span class="asterisk">*</span></label>
+                                    <label class="col-sm-3 control-label">Пароль </label>
                                     <div class="col-sm-9">
-                                        <input type="password" name="password" class="form-control" placeholder="Введите пароль..." required />
+                                        <input type="password" name="password" class="form-control" />
                                     </div>
                                 </div><!-- form-group -->
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Район</label>
+                                    <label class="col-sm-3 control-label">Доступ</label>
                                     <div class="col-sm-9">
                                         <select id="fruits" name="access" data-placeholder="Choose One" class="form-control" required>
                                             <option ></option>
-                                            <?foreach ($siti as $gorod):?>
-                                            <option value="<?=$gorod['id']?>"><?=$gorod['name']?></option>
+                                            <?foreach ($roles as $role):?>
+                                                    <option value="<?=$role['id']?>"><?=$role['name']?></option>
                                             <?endforeach;?>
 
                                         </select>
                                         <label class="error" for="fruits"></label>
                                     </div>
                                 </div><!-- form-group -->
-
                             </div><!-- row -->
                         </div><!-- panel-body -->
                         <div class="panel-footer">

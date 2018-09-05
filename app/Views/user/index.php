@@ -31,9 +31,12 @@
                 <thead class="">
                 <tr>
                     <th>№</th>
-                    <th>ФИО(Организация)</th>
+                    <th>ФИО</th>
+                    <th>Организация</th>
                     <th>Логин</th>
-                    <th>Район</th>
+                    <th>email</th>
+                    <th>Телефон (WhatsApp/Telegram)</th>
+                    <th>Права доступа</th>
                     <th>Редактирование</th>
 
                 </tr>
@@ -44,9 +47,12 @@
 
                 <tr>
                     <td> <?=$i++?></td>
+                    <td> <?=$user['fio']?></td>
                     <td> <?=$user['name']?></td>
                     <td><?=$user['login']?></td>
-                    <td><?=\App\Models\Raion::getNameSitiById($user['access'])?></td>
+                    <td><?=$user['email']?></td>
+                    <td><?=$user['phone']?></td>
+                    <td><?=\App\Models\Access::getRoleById($user['access'])?></td>
                     <td>
                         <a href="edit/<?=$user['id']?>/"><i class="fa fa-edit"></i></a>
                         <a href="drop/<?=$user['id']?>/" onclick="return confirm('Вы действительно хотите удалить пользователя?')"><i class="fa fa-minus-circle"></i></a>

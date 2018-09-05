@@ -25,7 +25,7 @@
             <div class="panel panel-primary-head">
                 <div class="panel-heading">
                     <h4 class="panel-title"><?=$title?></h4>
-                    <a href="/user/"><button class="btn btn-danger">Отмена</button></a>
+                    <a href="/organization/"><button class="btn btn-danger">Отмена</button></a>
                 </div><!-- panel-heading -->
             </div><!-- panel -->
             <div class="col-md-6">
@@ -36,73 +36,70 @@
                                 <a href="" class="panel-minimize tooltips" data-toggle="tooltip" title="Minimize Panel"><i class="fa fa-minus"></i></a>
                                 <a href="" class="panel-close tooltips" data-toggle="tooltip" title="Close Panel"><i class="fa fa-times"></i></a>
                             </div><!-- panel-btns -->
-                            <h4 class="panel-title">Форма редактирования пользователя</h4>
-                            <p>Измените данные</p>
+                            <h4 class="panel-title">Форма <?=$title?></h4>
+                            <p>Заполните поле</p>
                         </div><!-- panel-heading -->
                         <div class="panel-body">
                             <div class="row">
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">ФИО <span class="asterisk">*</span></label>
+                                    <label class="col-sm-3 control-label">ID организации <span class="asterisk">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="fio" class="form-control" value="<?=$user['fio']?>" required />
+                                        <input type="text" name="id_org" class="form-control" placeholder="ID организации ..." required />
                                     </div>
                                 </div><!-- form-group -->
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Название организации <span class="asterisk">*</span></label>
+                                    <label class="col-sm-3 control-label">Название на русском языке <span class="asterisk">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="name" class="form-control" value="<?=$user['name']?>" required />
-                                    </div>
-                                </div><!-- form-group -->
-
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Email <span class="asterisk">*</span></label>
-                                    <div class="col-sm-9">
-                                        <input type="email" name="email" class="form-control" value="<?=$user['email']?>" required />
+                                        <input type="text" name="name_ru" class="form-control" placeholder="Название на русском языке ..." required />
                                     </div>
                                 </div><!-- form-group -->
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Телефон (WhatsApp/Telegram) <span class="asterisk">*</span></label>
+                                    <label class="col-sm-3 control-label">Название на казахском <span class="asterisk">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="tel" name="phone" class="form-control" value="<?=$user['phone']?>" required />
-                                    </div>
-                                </div><!-- form-group -->
-
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Логин <span class="asterisk">*</span></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="login" class="form-control" value="<?=$user['login']?>" required />
+                                        <input type="text" name="name_kz" class="form-control" placeholder="Название на русском языке ..." required />
                                     </div>
                                 </div><!-- form-group -->
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Пароль </label>
+                                    <label class="col-sm-3 control-label">Тип организации</label>
                                     <div class="col-sm-9">
-                                        <input type="password" name="password" class="form-control" />
-                                    </div>
-                                </div><!-- form-group -->
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Доступ</label>
-                                    <div class="col-sm-9">
-                                        <select id="fruits" name="access" data-placeholder="Choose One" class="form-control" required>
+                                        <select id="fruits" name="type" data-placeholder="Choose One" class="form-control" required>
                                             <option ></option>
-                                            <?foreach ($roles as $role):?>
-                                                <?if($user['access']==$role['id']): ?>
-                                                <option value="<?=$role['id']?>" selected><?=$role['name']?></option>
-                                                <?else:?>
-                                                <option value="<?=$role['id']?>"><?=$role['name']?></option>
-                                            <?endif;?>
+                                            <?foreach ($types as $type):?>
+                                                <option value="<?=$type['id']?>"><?=$type['name']?></option>
                                             <?endforeach;?>
 
                                         </select>
                                         <label class="error" for="fruits"></label>
                                     </div>
                                 </div><!-- form-group -->
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Пароль<span class="asterisk">*</span></label>
+                                    <div class="col-sm-9">
+                                        <input type="password" name="password" class="form-control" placeholder="Пароль ..." required />
+                                    </div>
+                                </div><!-- form-group -->
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Район</label>
+                                    <div class="col-sm-9">
+                                        <select id="fruits" name="raion" data-placeholder="Choose One" class="form-control" required>
+                                            <option ></option>
+                                            <?foreach ($raiones as $raion):?>
+                                                <option value="<?=$raion['id']?>"><?=$raion['name']?></option>
+                                            <?endforeach;?>
+
+                                        </select>
+                                        <label class="error" for="fruits"></label>
+                                    </div>
+                                </div><!-- form-group -->
+
+
                             </div><!-- row -->
                         </div><!-- panel-body -->
                         <div class="panel-footer">
                             <div class="row">
                                 <div class="col-sm-9 col-sm-offset-3">
-                                    <input type="submit" name="saveuser" class="btn btn-primary mr5" value="Сохранить">
-
+                                    <input type="submit" name="saveorg" class="btn btn-primary mr5" value="Сохранить">
+                                    <button type="reset" class="btn btn-dark">Очистить</button>
                                 </div>
                             </div>
                         </div><!-- panel-footer -->

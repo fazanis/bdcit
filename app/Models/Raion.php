@@ -32,15 +32,7 @@ class Raion
         $result->execute();
     }
 
-    public static function getNameSitiById($id){
-        $db = DB::Connection();
-        $select = 'SELECT * FROM raioni WHERE id=:id';
-        $result = $db->prepare($select);
-        $result->bindParam('id',$id,\PDO::PARAM_INT);
-        $result ->execute();
-        $siti = $result->fetch(\PDO::FETCH_ASSOC);
-        return $siti['name'];
-    }
+
 
     public function editRaion($id,$data){
         $db = DB::Connection();

@@ -3,8 +3,8 @@
 namespace App;
 
 
+use App\Models\Access;
 use App\Models\Raion;
-use App\Models\Siti;
 use App\Models\Users;
 
 class UserController extends DefaultController
@@ -28,16 +28,17 @@ class UserController extends DefaultController
     public function actionCreate(){
         self::rangUser();
         $title = 'Добавление пользователя';
-        $sities = new Raion();
-        $siti = $sities->getAllRaion();
+        $role = new Access();
+        $roles = $role->getAllRole();
         if($_POST['saveuser']){
             $user = new Users();
             $user->createUser($_POST);
+            header('Location: /user/');
         }
 
         return $this->view->render('create',[
             'title'=>$title,
-            'siti'=>$siti,
+            'roles'=>$roles,
         ]);
     }
 
@@ -45,8 +46,8 @@ class UserController extends DefaultController
         self::rangUser();
         $userList=new Users();
         $user = $userList->getOneUser($id);
-        $sities = new Raion();
-        $siti = $sities->getAllRaion();
+        $role = new Access();
+        $roles = $role->getAllRole();
 
         if($_POST['saveuser']){
             $user = new Users();
@@ -54,7 +55,7 @@ class UserController extends DefaultController
         }
         return $this->view->render('edit',[
             'user'=>$user,
-            'siti'=>$siti,
+            'roles'=>$roles,
             ]);
     }
 
@@ -65,8 +66,8 @@ class UserController extends DefaultController
     }
 
     public function rangUser(){
-        if (Users::getUserAccess()['access']!=1){
-            echo 'Ваши права ограничены!';
+        if (Users::getRoleUser()['role']!='admin'){
+            header('Location: /');
             exit();
         }
     }
