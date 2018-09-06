@@ -8,12 +8,17 @@ class LoginController extends DefaultController
     public function actionIndex(){
         $title = 'Компьютерный парк организаций образования Павлодарской области';
         $errors = false;
+        $user = new Users();
         if(isset($_POST['butpost'])){
-            $login = $_POST['login'];
-            $password = $_POST['password'];
-            $user = new Users();
-            $userId= $user->userSingin($login,$password);
-
+            if($_POST['login']) {
+                $login = $_POST['login'];
+                $password = $_POST['password'];
+                $userId = $user->userSingin($login, $password);
+            }elseif($_POST['id']){
+                $id = $_POST['id'];
+                $password = $_POST['password'];
+                $userId = $user->userSinginById($id, $password);
+            }
             if($userId==false){
                 $errors[] = 'Введены не верные данные';
             }else{

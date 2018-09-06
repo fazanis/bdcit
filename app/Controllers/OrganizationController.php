@@ -46,6 +46,27 @@ class OrganizationController extends DefaultController
         ]);
     }
 
+    public function actionEdit($id){
+        self::rangUser();
+        $title = 'Редактирование организации образования';
+        $org = new Organization();
+        $orgs = $org->getOneOrgById($id);
+        $types = $org->getAllType();
+        $raion = new Raion();
+        $raiones = $raion->getAllRaion();
+
+        if($_POST['saveorg']){
+            $org->editOrganization($id,$_POST);
+            header('Location: /organization/');
+        }
+
+        return $this->view->render('create',[
+            'title'=>$title,
+            'orgs'=>$orgs,
+            'types'=>$types,
+            'raiones'=>$raiones,
+        ]);
+    }
     public function rangUser(){
         if (Users::getRoleUser()['role']!='admin'){
             header('Location: /');
