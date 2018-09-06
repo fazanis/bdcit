@@ -44,19 +44,19 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">ID организации <span class="asterisk">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="id_org" class="form-control" placeholder="ID организации ..." required />
+                                        <input type="text" name="id_org" class="form-control" placeholder="ID организации ..." value="<?=$orgs['id_org']?>" required />
                                     </div>
                                 </div><!-- form-group -->
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Название на русском языке <span class="asterisk">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="name_ru" class="form-control" placeholder="Название на русском языке ..." required />
+                                        <input type="text" name="name_ru" class="form-control" placeholder="Название на русском языке ..." value="<?=$orgs['name_ru']?>" required />
                                     </div>
                                 </div><!-- form-group -->
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Название на казахском <span class="asterisk">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="name_kz" class="form-control" placeholder="Название на русском языке ..." required />
+                                        <input type="text" name="name_kz" class="form-control" placeholder="Название на русском языке ..." value="<?=$orgs['name_kz']?>" required />
                                     </div>
                                 </div><!-- form-group -->
                                 <div class="form-group">
@@ -65,7 +65,11 @@
                                         <select id="fruits" name="type" data-placeholder="Choose One" class="form-control" required>
                                             <option ></option>
                                             <?foreach ($types as $type):?>
+                                                <?if($orgs['type']==$type['id']):?>
+                                                <option value="<?=$type['id']?>" selected><?=$type['name']?></option>
+                                                    <?else:?>
                                                 <option value="<?=$type['id']?>"><?=$type['name']?></option>
+                                            <?endif;?>
                                             <?endforeach;?>
 
                                         </select>
@@ -75,7 +79,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Пароль<span class="asterisk">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="password" name="password" class="form-control" placeholder="Пароль ..." required />
+                                        <input type="password" name="password" class="form-control" placeholder="Пароль ..."    />
                                     </div>
                                 </div><!-- form-group -->
                                 <div class="form-group">
@@ -84,7 +88,11 @@
                                         <select id="fruits" name="raion" data-placeholder="Choose One" class="form-control" required>
                                             <option ></option>
                                             <?foreach ($raiones as $raion):?>
+                                                <?if($orgs['raion']==$raion['id']):?>
+                                                <option value="<?=$raion['id']?>" selected><?=$raion['name']?></option>
+                                                    <?else:?>
                                                 <option value="<?=$raion['id']?>"><?=$raion['name']?></option>
+                                            <?endif;?>
                                             <?endforeach;?>
 
                                         </select>

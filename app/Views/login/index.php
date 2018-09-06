@@ -61,7 +61,7 @@
                     <form action="/login/" method="post">
                         <div class="input-group mb15">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input type="text" name="login" class="form-control" placeholder="ID">
+                            <input type="text" name="id" class="form-control" placeholder="ID">
                         </div><!-- input-group -->
                         <div class="input-group mb15">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>

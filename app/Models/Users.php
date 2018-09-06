@@ -29,6 +29,20 @@ class Users
 
    }
 
+    public function userSinginById($id_org,$password){
+        $db = DB::Connection();
+        $select = 'SELECT * FROM orobrazovania WHERE id_org = :id_org';
+        $result = $db->prepare($select);
+        $result->bindParam(':id_org',$id_org, \PDO::PARAM_STR);
+        $result->execute();
+        $user = $result->fetch(\PDO::FETCH_ASSOC);
+        if(password_verify($password,$user['password'])){
+            $_SESSION['user'] = $user['id'];
+            return $user['id'];
+        }
+
+    }
+
    // Получение прав пользователя
    public static function getUserAccess(){
        $db = DB::Connection();

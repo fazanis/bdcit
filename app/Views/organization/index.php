@@ -31,31 +31,29 @@
                     <thead class="">
                     <tr>
                         <th>№</th>
-                        <th>ФИО</th>
-                        <th>Организация</th>
-                        <th>Логин</th>
-                        <th>email</th>
-                        <th>Телефон (WhatsApp/Telegram)</th>
-                        <th>Права доступа</th>
+                        <th>ID</th>
+                        <th>Район</th>
+                        <th>Название на русском</th>
+                        <th>Название на казахском</th>
+                        <th>Тит организации</th>
                         <th>Редактирование</th>
 
                     </tr>
                     </thead>
                     <tbody>
                     <?$i=1;
-                    foreach ($userlist as $user):?>
+                    foreach ($orgs as $org):?>
 
                         <tr>
                             <td> <?=$i++?></td>
-                            <td> <?=$user['fio']?></td>
-                            <td> <?=$user['name']?></td>
-                            <td><?=$user['login']?></td>
-                            <td><?=$user['email']?></td>
-                            <td><?=$user['phone']?></td>
-                            <td><?=\App\Models\Access::getRoleById($user['access'])?></td>
+                            <td> <?=$org['id_org']?></td>
+                            <td> <?=$org['name_raion']?></td>
+                            <td><?=$org['name_ru']?></td>
+                            <td><?=$org['name_kz']?></td>
+                            <td><?=$org['name_type']?></td>
                             <td>
-                                <a href="edit/<?=$user['id']?>/"><i class="fa fa-edit"></i></a>
-                                <a href="drop/<?=$user['id']?>/" onclick="return confirm('Вы действительно хотите удалить пользователя?')"><i class="fa fa-minus-circle"></i></a>
+                                <a href="edit/<?=$org['id']?>/"><i class="fa fa-edit"></i></a>
+                                <a href="drop/<?=$org['id']?>/" onclick="return confirm('Вы действительно хотите удалить пользователя?')"><i class="fa fa-minus-circle"></i></a>
                             </td>
 
                         </tr>
