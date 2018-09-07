@@ -50,7 +50,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Название на русском языке <span class="asterisk">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="name_ru" class="form-control" placeholder="Название на русском языке ..." value="<?=$orgs['name_ru']?>" required />
+                                        <input type="text" name="name" class="form-control" placeholder="Название на русском языке ..." value="<?=$orgs['name_ru']?>" required />
                                     </div>
                                 </div><!-- form-group -->
                                 <div class="form-group">

@@ -23,7 +23,7 @@ class Users
        $result->execute();
        $user = $result->fetch(\PDO::FETCH_ASSOC);
        if(password_verify($password,$user['password'])){
-           $_SESSION['user'] = $user['id'];
+           $_SESSION['user'] = [$user['id'],'login'];
            return $user['id'];
        }
 
@@ -37,7 +37,7 @@ class Users
         $result->execute();
         $user = $result->fetch(\PDO::FETCH_ASSOC);
         if(password_verify($password,$user['password'])){
-            $_SESSION['user'] = $user['id'];
+            $_SESSION['user'] = [$user['id'],'id'];
             return $user['id'];
         }
 
@@ -47,11 +47,17 @@ class Users
    public static function getUserAccess(){
        $db = DB::Connection();
        $id = $_SESSION['user'];
-       $select = 'SELECT * FROM user WHERE id = :id';
+//       print_r($id);
+       if ($id[1]=='login') {
+           $select = 'SELECT * FROM user WHERE id = :id';
+       }elseif ($id[1]=='id'){
+           $select = 'SELECT * FROM orobrazovania WHERE id = :id';
+       }
        $result = $db->prepare($select);
-       $result->bindParam(':id',$id, \PDO::PARAM_STR);
+       $result->bindParam(':id',$id[0], \PDO::PARAM_STR);
        $result->execute();
        $user = $result->fetch(\PDO::FETCH_ASSOC);
+
        return $user;
    }
    public static function getRoleUser(){

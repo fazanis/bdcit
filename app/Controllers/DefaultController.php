@@ -20,7 +20,6 @@ class DefaultController
         $users = new Users();
         $user = $users->loggedUser();
         $username = $users->getOneUser($user);
-
         $title = 'Главная страница администрирования';
         return $this->view->render('index', [
             'title' => $title,

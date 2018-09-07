@@ -48,7 +48,7 @@
                             <td> <?=$i++?></td>
                             <td> <?=$org['id_org']?></td>
                             <td> <?=$org['name_raion']?></td>
-                            <td><?=$org['name_ru']?></td>
+                            <td><?=$org['name']?></td>
                             <td><?=$org['name_kz']?></td>
                             <td><?=$org['name_type']?></td>
                             <td>
