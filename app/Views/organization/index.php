@@ -32,12 +32,11 @@
                     <tr>
                         <th>№</th>
                         <th>ID</th>
-                        <th>Район</th>
                         <th>Название на русском</th>
                         <th>Название на казахском</th>
                         <th>Тит организации</th>
+                        <th>Район</th>
                         <th>Редактирование</th>
-
                     </tr>
                     </thead>
                     <tbody>
@@ -47,10 +46,10 @@
                         <tr>
                             <td> <?=$i++?></td>
                             <td> <?=$org['id_org']?></td>
-                            <td> <?=$org['name_raion']?></td>
                             <td><?=$org['name']?></td>
                             <td><?=$org['name_kz']?></td>
                             <td><?=$org['name_type']?></td>
+                            <td> <?=$org['name_raion']?></td>
                             <td>
                                 <a href="edit/<?=$org['id']?>/"><i class="fa fa-edit"></i></a>
                                 <a href="drop/<?=$org['id']?>/" onclick="return confirm('Вы действительно хотите удалить пользователя?')"><i class="fa fa-minus-circle"></i></a>

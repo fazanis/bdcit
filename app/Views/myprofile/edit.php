@@ -44,13 +44,13 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Имя <span class="asterisk">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="name" class="form-control" value="<?=$user['name']?>" required />
+                                        <input type="text" name="fio" class="form-control" value="<?=$user['fio']?>" required />
                                     </div>
                                 </div><!-- form-group -->
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Логин <span class="asterisk">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="login" class="form-control" value="<?=$user['login']?>" required />
+                                        <input type="text" name="login" class="form-control" value="<?=$user['login']?>" required disabled="disabled" />
                                     </div>
                                 </div><!-- form-group -->
                                 <div class="form-group">
@@ -59,10 +59,10 @@
                                         <input type="text" name="email" class="form-control" value="<?=$user['email']?>" required />
                                     </div>
                                 </div><!-- form-group -->
-                                <div class="form-group" style="display: none">
-                                    <label class="col-sm-3 control-label"> <span class="asterisk">*</span></label>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Телефон (WhatsApp/Telegram) <span class="asterisk">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="password" name="access" class="form-control" value="<?=$user['access']?>" />
+                                        <input type="text" name="phone" class="form-control" value="<?=$user['phone']?>" required />
                                     </div>
                                 </div><!-- form-group -->
                                 <div class="form-group">

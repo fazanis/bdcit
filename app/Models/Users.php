@@ -72,15 +72,18 @@ class Users
    }
 
    //Получение данных одного пользователя по id
-   public function getOneUser($id){
+   public function getOneUser($id,$paramm){
        $db = DB::Connection();
-       $select = 'SELECT * FROM user WHERE id=:id';
+       if ($paramm=='login') {
+           $select = 'SELECT * FROM user WHERE id=:id';
+       }elseif ($paramm=='id'){
+           $select = 'SELECT *,id_org AS login FROM orobrazovania WHERE id=:id';
+       }
        $result = $db->prepare($select);
        $result->bindParam(':id',$id,\PDO::PARAM_STR);
        $result->execute();
 
        $user = $result->fetch(\PDO::FETCH_ASSOC);
-
        return $user;
    }
 
@@ -150,6 +153,52 @@ class Users
 
    }
 
+    public function updateProfile($id,array $data){
+        $db = DB::Connection();
+        $user = $_SESSION['user'];
+        if($user[1]=='login') {
+            if ($data['password'] == '') {
+                $update = "UPDATE user SET fio=:fio, email=:email,phone=:phone,login=:login WHERE id = :id";
+                $result = $db->prepare($update);
+                $result->bindParam(':id', $user[0], \PDO::PARAM_INT);
+                $result->bindParam(':fio', $data['fio'], \PDO::PARAM_STR);
+                $result->bindParam(':email', $data['email'], \PDO::PARAM_STR);
+                $result->bindParam(':phone', $data['phone'], \PDO::PARAM_STR);
+                $result->bindParam(':login', $data['login'], \PDO::PARAM_STR);
+            } else {
+                $update = "UPDATE user SET fio=:fio, email=:email,phone=:phone ,login=:login,password=:password WHERE id = :id";
+                $result = $db->prepare($update);
+                $result->bindParam(':id', $user[0], \PDO::PARAM_INT);
+                $result->bindParam(':fio', $data['fio'], \PDO::PARAM_STR);
+                $result->bindParam(':email', $data['email'], \PDO::PARAM_STR);
+                $result->bindParam(':phone', $data['phone'], \PDO::PARAM_STR);
+                $result->bindParam(':login', $data['login'], \PDO::PARAM_STR);
+                $result->bindParam(':password', password_hash($data['password'], PASSWORD_DEFAULT), \PDO::PARAM_STR);
+            }
+        }elseif($user[1]=='id'){
+            if ($data['password'] == '') {
+                $update = "UPDATE orobrazovania SET fio=:fio,email=:email,phone=:phone,id_org=:login WHERE id = :id";
+                $result = $db->prepare($update);
+                $result->bindParam(':id', $user[0], \PDO::PARAM_INT);
+                $result->bindParam(':fio', $data['fio'], \PDO::PARAM_STR);
+                $result->bindParam(':email', $data['email'], \PDO::PARAM_STR);
+                $result->bindParam(':phone', $data['phone'], \PDO::PARAM_STR);
+                $result->bindParam(':login', $data['login'], \PDO::PARAM_INT);
+            } else {
+                $update = "UPDATE orobrazovania SET fio=:fio,email=:email,phone=:phone ,id_org=:login,password=:password WHERE id = :id";
+                $result = $db->prepare($update);
+                $result->bindParam(':id', $user[0], \PDO::PARAM_INT);
+                $result->bindParam(':fio', $data['fio'], \PDO::PARAM_STR);
+                $result->bindParam(':email', $data['email'], \PDO::PARAM_STR);
+                $result->bindParam(':phone', $data['phone'], \PDO::PARAM_STR);
+                $result->bindParam(':login', $data['login'], \PDO::PARAM_INT);
+                $result->bindParam(':password', password_hash($data['password'], PASSWORD_DEFAULT), \PDO::PARAM_STR);
+            }
+        }
+        $result->execute();
+
+    }
+
    public function dropUser($id){
         $db = DB::Connection();
 
@@ -176,6 +225,26 @@ class Users
           if($dostup==$role){
              return true;
           }
+       }
+   }
+
+   public function takePespondentData($id,$data){
+       $db=DB::Connection();
+
+       if ($data == 'login'){
+           $select = 'SELECT * FROM user WHERE id = :id';
+       }elseif ($data == 'id'){
+           $select = 'SELECT * FROM orobrazovania WHERE id = :id';
+       }
+       $result = $db->prepare($select);
+       $result->bindParam(':id',$id,\PDO::PARAM_INT);
+       $result->execute();
+       $end = $result->fetch(\PDO::FETCH_ASSOC);
+
+       if ($end['fio']==NULL){
+           return true;
+       }else{
+           return false;
        }
    }
 }

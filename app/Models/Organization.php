@@ -58,15 +58,26 @@ class Organization
 
     public function editOrganization($id,$data){
         $db=DB::Connection();
-        $update = "UPDATE orobrazovania SET id_org=:id_org, raion=:raion,name=:name,name_kz=:name_kz,type=:type,password=:password WHERE id = :id";
-        $result = $db->prepare($update);
-        $result->bindParam(':id',$id,\PDO::PARAM_INT);
-        $result->bindParam(':id_org',$data['id_org'],\PDO::PARAM_STR);
-        $result->bindParam(':raion',$data['raion'],\PDO::PARAM_STR);
-        $result->bindParam(':name',$data['name'],\PDO::PARAM_STR);
-        $result->bindParam(':name_kz',$data['name_kz'],\PDO::PARAM_STR);
-        $result->bindParam(':type',$data['type'],\PDO::PARAM_INT);
-        $result->bindParam(':password',$data['password'],\PDO::PARAM_INT);
+        if($data['password']) {
+            $update = "UPDATE orobrazovania SET id_org=:id_org, raion=:raion,name=:name,name_kz=:name_kz,type=:type,password=:password WHERE id = :id";
+            $result = $db->prepare($update);
+            $result->bindParam(':id', $id, \PDO::PARAM_INT);
+            $result->bindParam(':id_org', $data['id_org'], \PDO::PARAM_STR);
+            $result->bindParam(':raion', $data['raion'], \PDO::PARAM_STR);
+            $result->bindParam(':name', $data['name'], \PDO::PARAM_STR);
+            $result->bindParam(':name_kz', $data['name_kz'], \PDO::PARAM_STR);
+            $result->bindParam(':type', $data['type'], \PDO::PARAM_INT);
+            $result->bindParam(':password', password_hash($data['password'], PASSWORD_DEFAULT), \PDO::PARAM_INT);
+        }else{
+            $update = "UPDATE orobrazovania SET id_org=:id_org, raion=:raion,name=:name,name_kz=:name_kz,type=:type WHERE id = :id";
+            $result = $db->prepare($update);
+            $result->bindParam(':id', $id, \PDO::PARAM_INT);
+            $result->bindParam(':id_org', $data['id_org'], \PDO::PARAM_STR);
+            $result->bindParam(':raion', $data['raion'], \PDO::PARAM_STR);
+            $result->bindParam(':name', $data['name'], \PDO::PARAM_STR);
+            $result->bindParam(':name_kz', $data['name_kz'], \PDO::PARAM_STR);
+            $result->bindParam(':type', $data['type'], \PDO::PARAM_INT);
+        }
         $result->execute();
     }
 }

@@ -26,6 +26,7 @@
                 <div class="panel-heading">
 
                     <a href="edit/"><button class="btn btn-success">Редактировать</button></a>
+                    <h3><?=$alt?></h3>
                 </div><!-- panel-heading -->
                 <div class="col-md-6">
 
@@ -34,8 +35,8 @@
 
                             <tbody>
                             <tr>
-                                <td><b>Имя</b></td>
-                                <td><?=$myProfile['name']?></td>
+                                <td><b>ФИО</b></td>
+                                <td><?=$myProfile['fio']?></td>
                             </tr>
                             <tr>
                                 <td><b>Логин</b></td>
@@ -44,6 +45,10 @@
                             <tr>
                                 <td><b>Почта</b></td>
                                 <td><?=$myProfile['email']?></td>
+                            </tr>
+                            <tr>
+                                <td><b>Телефон (WhatsApp/Telegram)</b></td>
+                                <td><?=$myProfile['phone']?></td>
                             </tr>
 
                             </tbody>
