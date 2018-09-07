@@ -3,7 +3,6 @@ use App\Core\Router;
 session_start();
 define('APPLICATION_PATH', getcwd().'/../app/');
 define('PUBLIC_PATH', getcwd());
-
 require APPLICATION_PATH .'/../vendor/autoload.php';
 
 

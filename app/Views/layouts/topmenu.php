@@ -12,7 +12,7 @@
         </div><!-- header-left -->
 
         <div class="header-right">
-            <span style="color: white; font-size: 25px"><?=\App\Models\Users::getUserAccess()['name']?></span>
+            <span style="color: white; font-size: 25px"><?=\App\Models\Users::getUserAccess()['organizacia']?></span>
             <div class="pull-right">
 
                 <form class="form form-search" action="search-results.html">

@@ -7,14 +7,14 @@ use \App\Models\Users;?>
         </a>
         <div class="media-body">
             <h4 class="media-heading"><a href="/myprofile/"><?=Users::getUserAccess()['fio']?></a></h4>
-            <small class="text-muted"><?=Users::getUserAccess()['name']?></small>
+            <small class="text-muted"><?=Users::getUserAccess()['organizacia']?></small>
         </div>
     </div><!-- media -->
 
     <h5 class="leftpanel-title">Навигация</h5>
     <ul class="nav nav-pills nav-stacked">
         <li <?if ($_GET['route']==''):?>class="active"<?endif;?>><a href="/"><i class="fa fa-home"></i> <span>Главная</span></a></li>
-        <?if(Users::getRoleUser()['role']!='otdel' and Users::getRoleUser()['role']!='analitik' and Users::getRoleUser()['role']!=''):?>
+        <?if(Users::getDostup(['admin','analitik'])):?>
         <li <?if ($_GET['route']=='user/'):?>class="active"<?endif;?>><a href="/user/"><span class="pull-right badge"><?=Users::getCollParam()?></span><i class="fa fa-users"></i> <span>Пользователи</span></a></li>
         <li <?if ($_GET['route']=='raion/'):?>class="active"<?endif;?>><a href="/raion/"><span class="pull-right badge"><?=\App\Models\Raion::getCollRaion()?></span><i class="fa fa-envelope-o"></i> <span>Списки районов</span></a></li>
         <li <?if ($_GET['route']=='organization/'):?>class="active"<?endif;?>><a href="/organization/"><i class="fa fa-file-text"></i> <span>Организации образования</span></a>
