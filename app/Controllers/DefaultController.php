@@ -18,9 +18,11 @@ class DefaultController
     public function actionIndex()
     {
 
+
         $users = new Users();
         $user = $users->loggedUser();
         $username = $users->getOneUser($user);
+
         $title = 'Главная страница администрирования';
         $test = $users->takePespondentData($user[0],$user[1]);
         if($test==true){
@@ -33,5 +35,5 @@ class DefaultController
             'alt'=>$alt,
         ]);
     }
-    
+
 }
